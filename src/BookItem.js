@@ -12,7 +12,7 @@ class BookItem extends Component {
         const newShelf = e.target.value;
         BooksAPI.update(this.state.book, newShelf).then(
                 () => {
-                    this.props.loadAllBooks();
+                    // this.props.loadAllBooks();
                 }
         )
     }
@@ -21,9 +21,9 @@ class BookItem extends Component {
         return (
             <div className="book">
                 <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.state.book.imageLinks.smallThumbnail})`}}></div>
+                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.state.book.imageLinks ? this.state.book.imageLinks.smallThumbnail : ''})`}}></div>
                     <div className="book-shelf-changer">
-                        <select onChange={this.handleSelect} value={this.state.book.shelf}>
+                        <select onChange={this.handleSelect} value={this.state.book.shelf ? this.state.book.shelf : 'none'}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading" >Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
@@ -33,7 +33,7 @@ class BookItem extends Component {
                     </div>
                 </div>
                 <div className="book-title">{this.state.book.title}</div>
-                <div className="book-authors">{this.state.book.authors.map(author => (<span key={author}>{author} </span>))}</div>
+                <div className="book-authors">{this.state.book.authors ? this.state.book.authors.map(author => (<span key={author}>{author} </span>)) : ''}</div>
             </div>
         )
     }
