@@ -11,17 +11,21 @@ class BookList extends Component {
         read: []
     }
 
-    componentDidMount() {
+    loadAllBooks = () =>{
         BooksAPI.getAll().then(
-          (response) => {
-            console.log(response);
-            this.setState({
-              currentlyReading: response.filter(book => book.shelf === 'currentlyReading'),
-              wantToRead: response.filter(book => book.shelf === 'wantToRead'),
-              read: response.filter(book => book.shelf === 'read')
-            })
-          }
-        )
+            (response) => {
+              console.log(response);
+              this.setState({
+                currentlyReading: response.filter(book => book.shelf === 'currentlyReading'),
+                wantToRead: response.filter(book => book.shelf === 'wantToRead'),
+                read: response.filter(book => book.shelf === 'read')
+              })
+            }
+          )
+    }
+
+    componentDidMount() {
+        this.loadAllBooks();
       }
 
     render() {
@@ -36,12 +40,7 @@ class BookList extends Component {
                             <h2 className="bookshelf-title">Currently Reading</h2>
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
-                                    <li>
-                                        <BookItem />
-                                    </li>
-                                    <li>
-                                        <BookItem />
-                                    </li>
+                                    {this.state.currentlyReading.map(book => (<li key={book.id}><BookItem book={book} loadAllBooks={this.loadAllBooks} /></li>))}
                                 </ol>
                             </div>
                         </div>
@@ -49,40 +48,23 @@ class BookList extends Component {
                             <h2 className="bookshelf-title">Want to Read</h2>
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
-                                    <li>
-                                        <BookItem />
-                                    </li>
-                                    <li>
-                                        <BookItem />
-                                    </li>
+                                {this.state.wantToRead.map(book => (<li key={book.id}><BookItem book={book} loadAllBooks={this.loadAllBooks} /></li>))}
                                 </ol>
                             </div>
                         </div>
                         <div className="bookshelf">
                             <h2 className="bookshelf-title">Read</h2>
                             <div className="bookshelf-books">
-                                <ol className="books-grid">
-                                    <li>
-                                        <BookItem />
-                                    </li>
-                                    <li>
-                                        <BookItem />
-                                    </li>
-                                    <li>
-                                        <BookItem />
-                                    </li>
+                                <ol className="books-grid">                                    
+                                {this.state.read.map(book => (<li key={book.id}><BookItem book={book} loadAllBooks={this.loadAllBooks} /></li>))}
                                 </ol>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="open-search">
-                    <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
-                </div>
             </div>
         )
     }
-
 }
 
 export default BookList;

@@ -20,24 +20,18 @@ class BooksApp extends React.Component {
     showSearchPage: false
   };
 
-  // componentDidMount() {
-  //   BooksAPI.getAll().then(
-  //     (response) => {
-  //       console.log(response);
-  //       this.setState({
-  //         allBooks: response
-  //       })
-  //     }
-  //   )
-  // }
+
 
   render() {
     return (
       <div className="app">
         <Router>
           <Route path='/search' component={BookSearch} />
-          <Route path='/' exact component={BookList}/>
+          <Route path='/' exact component={BookList} />
         </Router>
+        <div className="open-search">
+          <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
+        </div>
       </div>
     )
   }
