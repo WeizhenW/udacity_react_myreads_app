@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import * as BooksAPI from './BooksAPI';
 
 import BookItem from './BookItem';
@@ -14,7 +13,6 @@ class BookList extends Component {
     loadAllBooks = () => {
         BooksAPI.getAll().then(
             (response) => {
-                console.log(response);
                 this.setState({
                     currentlyReading: response.filter(book => book.shelf === 'currentlyReading'),
                     wantToRead: response.filter(book => book.shelf === 'wantToRead'),

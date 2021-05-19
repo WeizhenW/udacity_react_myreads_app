@@ -1,7 +1,6 @@
 import React from 'react';
-import * as BooksAPI from './BooksAPI';
 import './App.css';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 
 import BookSearch from './BookSearch';
 import BookList from './BookList';
