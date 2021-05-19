@@ -22,6 +22,7 @@ class BookItem extends Component {
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.state.book.imageLinks ? this.state.book.imageLinks.smallThumbnail : ''})`}}></div>
                     <div className="book-shelf-changer">
+                        {console.log(this.state.book)}
                         <select onChange={this.handleSelect} value={this.state.book.shelf ? this.state.book.shelf : 'none'}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading" >Currently Reading</option>
