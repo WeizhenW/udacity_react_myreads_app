@@ -11,6 +11,7 @@ class BookSearch extends Component {
     }
 
     componentDidMount() {
+        //need to fetch the currently on shelves books, to compare with the search result
         BooksAPI.getAll().then(
             (response) => {
                 this.setState({
@@ -20,7 +21,7 @@ class BookSearch extends Component {
             }
         )
     }
-
+//handle query input
     handleChange = (e) => {
         this.setState({
             ...this.state,
@@ -30,6 +31,7 @@ class BookSearch extends Component {
         if (e.target.value) {
             BooksAPI.search(e.target.value).then(
                 (response) => {
+                    //check if the books in search result already on shelves, if yes => update the shelf status
                     var i, j;
                     for (i = 0; i < response.length; i++) {
                         for (j = 0; j < this.state.booksOnShelves.length; j++) {
@@ -46,6 +48,7 @@ class BookSearch extends Component {
                 }
             )
         } else {
+            //clear the search result when the query is empty
             this.setState({
                 ...this.state,
                 searchResult: []

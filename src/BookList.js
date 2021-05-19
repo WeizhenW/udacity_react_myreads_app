@@ -12,6 +12,7 @@ class BookList extends Component {
 
     loadAllBooks = () => {
         BooksAPI.getAll().then(
+            //filter the books into three shelves
             (response) => {
                 this.setState({
                     currentlyReading: response.filter(book => book.shelf === 'currentlyReading'),

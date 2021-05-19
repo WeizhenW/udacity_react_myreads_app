@@ -6,11 +6,12 @@ class BookItem extends Component {
     state = {
         book: this.props.book
     }
-
+//handle the selection of bookshelf
     handleSelect = (e) => {
         const newShelf = e.target.value;
         BooksAPI.update(this.state.book, newShelf).then(
                 () => {
+                    //fetch all books to make sure the update has been reflected on the page
                     this.props.loadAllBooks();
                 }
         )
