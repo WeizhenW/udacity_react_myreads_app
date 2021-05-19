@@ -17,10 +17,8 @@ class BookSearch extends Component {
         })
 
         if (e.target.value) {
-            console.log(e.target.value);
             BooksAPI.search(e.target.value).then(
                 (response) => {
-                    console.log(response);
                     this.setState({
                         ...this.state,
                         searchResult: response
@@ -38,14 +36,9 @@ class BookSearch extends Component {
                     <div className="search-books-input-wrapper">
                         <input onChange={this.handleChange} type="text" placeholder="Search by title or author" />
                     </div>
-                    <div className="bookshelf-books">
-                        <ol className="books-grid">
-                            {Array.isArray(this.state.searchResult) && this.state.searchResult.map(book => (<li key={book.id}><BookItem book={book} /></li>))}
-                        </ol>
-                    </div>
                 </div>
                 <div className="search-books-results">
-                    <ol className="books-grid"></ol>
+                    <ol className="books-grid">{Array.isArray(this.state.searchResult) && this.state.searchResult.map(book => (<li key={book.id}><BookItem book={book} loadAllBooks={() => {}}/></li>))}</ol>
                 </div>
             </div>)
     }

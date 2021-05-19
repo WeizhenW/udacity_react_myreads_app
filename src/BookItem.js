@@ -12,7 +12,7 @@ class BookItem extends Component {
         const newShelf = e.target.value;
         BooksAPI.update(this.state.book, newShelf).then(
                 () => {
-                    // this.props.loadAllBooks();
+                    this.props.loadAllBooks();
                 }
         )
     }
